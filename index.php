@@ -97,9 +97,7 @@ $lot_time_remaining = sprintf('%02d:%02d', $hours_remaining, $minutes_remaining)
                             <span class="lot__cost">10 999<b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
-                            <!-- На такую запись, почему-то, сниффер ругается. -->
-                            <!-- <\?= $lot_time_remaining; ?> -->
-                            <?php echo $lot_time_remaining; ?>
+                            <?= $lot_time_remaining; ?>
                         </div>
                     </div>
                 </div>
