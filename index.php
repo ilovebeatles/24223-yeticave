@@ -12,7 +12,10 @@ $tomorrow = strtotime('tomorrow midnight');
 $now = time();
 
 // далее нужно вычислить оставшееся время до начала следующих суток и записать его в переменную $lot_time_remaining
-// ...
+$lot_time_remaining = $tomorrow - $now;
+$hours_remaining = floor($lot_time_remaining / 3600);
+$minutes_remaining = floor(($lot_time_remaining % 3600) / 60);
+$lot_time_remaining = sprintf('%02d:%02d', $hours_remaining, $minutes_remaining);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -94,7 +97,7 @@ $now = time();
                             <span class="lot__cost">10 999<b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
-                            <?=$lot_time_remaining;?>
+                            <?= $lot_time_remaining; ?>
                         </div>
                     </div>
                 </div>
