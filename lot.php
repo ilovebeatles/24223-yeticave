@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Europe/Moscow');
-define('SECONDS_IN_MINUTE', 60);
-define('SECONDS_IN_HOUR', 3600);
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 3600;
 
 // ставки пользователей, которыми надо заполнить таблицу
 $bets = [
@@ -13,18 +13,14 @@ $bets = [
 
 function convertSeconds(int $seconds, int $divider)
 {
-    if ($seconds >= $divider) {
-        return floor($seconds / $divider);
-    }
-
-    return null;
+    return floor($seconds / $divider);
 }
 
 function convertTimeToRelativeFormat(int $timeStamp)
 {
     $now = time();
     $passed_time = $now - $timeStamp;
-    $passed_time_in_hours = convertSeconds(floor($passed_time), floor(SECONDS_IN_HOUR));
+    $passed_time_in_hours = convertSeconds($passed_time, SECONDS_IN_HOUR);
 
     if ($passed_time_in_hours != null) {
         if ($passed_time_in_hours > 24) {
