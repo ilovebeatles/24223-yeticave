@@ -12,29 +12,33 @@ $bets = [
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
 
-function convertTimeToRelativeFormat(int $timeStamp)
+function convertTimeToRelativeFormat(int $timeStamp) : string
 {
+    if ($timeStamp < 0) {
+        throw new \InvalidArgumentException('Time Stamp cannot be less than zero');
+    }
+
+    // хотелось бы сразу обработать две ошибки, но не знаю как это сделать, не сделав переменную с time()
+
     $passed_time = time() - $timeStamp;
 
     if ($passed_time < 0) {
-        throw new InvalidArgumentException('timeStamp cannot be greater than time().');
+        throw new \InvalidArgumentException('Time Stamp cannot be greater than time().');
     }
 
     $passed_time = $passed_time >= 0 ? $passed_time : 0;
     $passed_hours = round($passed_time / SECONDS_IN_HOUR);
 
-    if ($passed_hours > 0) {
-        if ($passed_hours > 24) {
-            return date(DEFAULT_DATE_FORMAT, $timeStamp);
-        }
-
-        if ($passed_hours < 24 && $passed_hours > 1) {
-            return sprintf('%d часов назад', $passed_hours);
-        }
+    if ($passed_hours == 0) {
+        $passed_minutes = round($passed_time / SECONDS_IN_MINUTE);
+        return sprintf('%d минут назад', $passed_minutes);
     }
 
-    $passed_minutes = round($passed_time / SECONDS_IN_MINUTE);
-    return sprintf('%d минут назад', $passed_minutes);
+    if ($passed_hours > 24) {
+        return date(DEFAULT_DATE_FORMAT, $timeStamp);
+    }
+
+    return sprintf('%d часов назад', $passed_hours);
 }
 ?>
 
