@@ -3,8 +3,6 @@ date_default_timezone_set('Europe/Moscow');
 const SECONDS_IN_MINUTE = 60;
 const SECONDS_IN_HOUR = 3600;
 const DEFAULT_DATE_FORMAT = 'd.m.y в H:i';
-const DEFAULT_HOURS_FORMAT = '%d часов назад';
-const DEFAULT_MINUTES_FORMAT = '%d минут назад';
 
 // ставки пользователей, которыми надо заполнить таблицу
 $bets = [
@@ -16,23 +14,27 @@ $bets = [
 
 function convertTimeToRelativeFormat(int $timeStamp)
 {
-    $now = time();
-    $passed_time = $now - $timeStamp;
-    $passed_time = $passed_time >= 0 ? $passed_time : 0;
-    $passed_time_in_hours = round($passed_time / SECONDS_IN_HOUR);
+    $passed_time = time() - $timeStamp;
 
-    if ($passed_time_in_hours != null) {
-        if ($passed_time_in_hours > 24) {
+    if ($passed_time < 0) {
+        throw new InvalidArgumentException('timeStamp cannot be greater than time().');
+    }
+
+    $passed_time = $passed_time >= 0 ? $passed_time : 0;
+    $passed_hours = round($passed_time / SECONDS_IN_HOUR);
+
+    if ($passed_hours > 0) {
+        if ($passed_hours > 24) {
             return date(DEFAULT_DATE_FORMAT, $timeStamp);
         }
 
-        if ($passed_time_in_hours < 24 && $passed_time_in_hours > 1) {
-            return sprintf(DEFAULT_HOURS_FORMAT, $passed_time_in_hours);
+        if ($passed_hours < 24 && $passed_hours > 1) {
+            return sprintf('%d часов назад', $passed_hours);
         }
     }
 
-    $passed_time_in_minutes = round($passed_time / SECONDS_IN_MINUTE);
-    return sprintf(DEFAULT_MINUTES_FORMAT, $passed_time_in_minutes);
+    $passed_minutes = round($passed_time / SECONDS_IN_MINUTE);
+    return sprintf('%d минут назад', $passed_minutes);
 }
 ?>
 
