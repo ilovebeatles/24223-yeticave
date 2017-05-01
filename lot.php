@@ -1,5 +1,6 @@
 <?php
 date_default_timezone_set('Europe/Moscow');
+
 const SECONDS_IN_MINUTE = 60;
 const SECONDS_IN_HOUR = 3600;
 const DEFAULT_DATE_FORMAT = 'd.m.y в H:i';
