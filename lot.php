@@ -1,4 +1,9 @@
 <?php
+date_default_timezone_set('Europe/Moscow');
+
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 3600;
+const DEFAULT_DATE_FORMAT = 'd.m.y в H:i';
 
 // ставки пользователей, которыми надо заполнить таблицу
 $bets = [
@@ -7,6 +12,32 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
+
+function convertTimeToRelativeFormat(int $timeStamp) : string
+{
+    if ($timeStamp < 0) {
+        throw new \InvalidArgumentException('Timestamp cannot be less than zero');
+    }
+
+    $passed_time = time() - $timeStamp;
+
+    if ($passed_time < 0) {
+        throw new \InvalidArgumentException('Timestamp cannot be greater than current time.');
+    }
+
+    $passed_hours = round($passed_time / SECONDS_IN_HOUR);
+
+    if ($passed_hours < 1) {
+        $passed_minutes = round($passed_time / SECONDS_IN_MINUTE);
+        return sprintf('%d минут назад', $passed_minutes);
+    }
+
+    if ($passed_hours < 24) {
+        return sprintf('%d часов назад', $passed_hours);
+    }
+
+    return date(DEFAULT_DATE_FORMAT, $timeStamp);
+}
 ?>
 
 <!DOCTYPE html>
@@ -111,11 +142,13 @@ $bets = [
                     <h3>История ставок (<span>4</span>)</h3>
                     <!-- заполните эту таблицу данными из массива $bets-->
                     <table class="history__list">
-                        <tr class="history__item">
-                            <td class="history__name"><!-- имя автора--></td>
-                            <td class="history__price"><!-- цена--> р</td>
-                            <td class="history__time"><!-- дата в человеческом формате--></td>
-                        </tr>
+                        <?php foreach ($bets as $bet) : ?>
+                            <tr class="history__item">
+                                <td class="history__name"><?= $bet["name"] ?></td>
+                                <td class="history__price"><?= $bet["price"] ?> р</td>
+                                <td class="history__time"><?= convertTimeToRelativeFormat($bet["ts"]) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </table>
                 </div>
             </div>
