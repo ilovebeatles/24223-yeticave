@@ -14,11 +14,6 @@ $bets = [
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
 
-function convertSeconds(int $seconds, int $divider)
-{
-    return floor($seconds / $divider);
-}
-
 function convertTimeToRelativeFormat(int $timeStamp)
 {
     $now = time();
