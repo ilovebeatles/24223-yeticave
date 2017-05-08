@@ -88,7 +88,7 @@
                             <span class="lot__cost"><?= $lot["price"] ?><b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
-                            <?= $params['lot_time_remaining']; ?>
+                            <?= $lot_time_remaining; ?>
                         </div>
                     </div>
                 </div>

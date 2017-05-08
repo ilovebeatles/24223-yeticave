@@ -31,18 +31,17 @@ function convert_time_to_relative_format(int $timeStamp) : string
     return date(DEFAULT_DATE_FORMAT, $timeStamp);
 }
 
-function make_data_safe(&$value, $key, $array) 
-{
-    $value = htmlspecialchars($value);
-}
-
 function include_template(string $template_name, array $params = []) : string
 {
     if (!file_exists("templates/$template_name")) {
         return '';
     }
 
-    array_walk_recursive($params, 'make_data_safe', $params);
+    array_walk_recursive($params, function(&$item) {
+        $item = htmlspecialchars($item);
+    });
+
+    extract($params, EXTR_OVERWRITE);
 
     ob_start();
     include("templates/$template_name");
