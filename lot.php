@@ -10,13 +10,13 @@
 </head>
 <body>
 
-<?php include_template("header.php", []); ?>
+<?= include_template('header.php'); ?>
 
 <main>
-    <?php include_template("lot.php", []); ?>
+    <?= include_template('lot.php'); ?>
 </main>
 
-<?php include_template("footer.php", []); ?>
+<?= include_template('footer.php'); ?>
 
 </body>
 </html>

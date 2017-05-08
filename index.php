@@ -17,7 +17,7 @@ $hours_remaining = floor($lot_time_remaining / 3600);
 $minutes_remaining = floor(($lot_time_remaining % 3600) / 60);
 $lot_time_remaining = sprintf('%02d:%02d', $hours_remaining, $minutes_remaining);
 ?>
-<?php require_once "functions.php"; ?>
+<?php require_once 'functions.php'; ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -28,13 +28,13 @@ $lot_time_remaining = sprintf('%02d:%02d', $hours_remaining, $minutes_remaining)
 </head>
 <body>
 
-<?php include_template("header.php", []); ?>
+<?= include_template('header.php'); ?>
 
 <main class="container">
-    <?php include_template("home.php", ["lot_time_remaining" => $lot_time_remaining]); ?>
+    <?= include_template('home.php', ['lot_time_remaining' => $lot_time_remaining]); ?>
 </main>
 
-<?php include_template("footer.php", []); ?>
+<?= include_template('footer.php'); ?>
 
 </body>
 </html>

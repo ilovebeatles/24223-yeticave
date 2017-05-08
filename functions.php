@@ -1,18 +1,52 @@
 <?php
-function include_template(string $templateName, array $params) : string
+date_default_timezone_set('Europe/Moscow');
+
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 3600;
+const DEFAULT_DATE_FORMAT = 'd.m.y в H:i';
+
+function convert_time_to_relative_format(int $timeStamp) : string
 {
-    if ($params) {
-        foreach ($params as $key => $value) {
-            $params[$key] = htmlspecialchars($value);
-        }
+    if ($timeStamp < 0) {
+        throw new \InvalidArgumentException('Timestamp cannot be less than zero');
     }
 
-    $template = @include("templates/$templateName");
+    $passed_time = time() - $timeStamp;
 
-    if (!$template) {
+    if ($passed_time < 0) {
+        throw new \InvalidArgumentException('Timestamp cannot be greater than current time.');
+    }
+
+    $passed_hours = round($passed_time / SECONDS_IN_HOUR);
+
+    if ($passed_hours < 1) {
+        $passed_minutes = round($passed_time / SECONDS_IN_MINUTE);
+        return sprintf('%d минут назад', $passed_minutes);
+    }
+
+    if ($passed_hours < 24) {
+        return sprintf('%d часов назад', $passed_hours);
+    }
+
+    return date(DEFAULT_DATE_FORMAT, $timeStamp);
+}
+
+function make_data_safe(&$value, $key, $array) 
+{
+    $value = htmlspecialchars($value);
+}
+
+function include_template(string $template_name, array $params = []) : string
+{
+    if (!file_exists("templates/$template_name")) {
         return '';
     }
 
-    return $template;
+    array_walk_recursive($params, 'make_data_safe', $params);
+
+    ob_start();
+    include("templates/$template_name");
+
+    return ob_get_clean();
 }
 ?>

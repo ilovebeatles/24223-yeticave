@@ -1,10 +1,4 @@
 <?php
-date_default_timezone_set('Europe/Moscow');
-
-const SECONDS_IN_MINUTE = 60;
-const SECONDS_IN_HOUR = 3600;
-const DEFAULT_DATE_FORMAT = 'd.m.y в H:i';
-
 // ставки пользователей, которыми надо заполнить таблицу
 $bets = [
     ['name' => 'Иван', 'price' => 11500, 'ts' => strtotime('-' . rand(1, 50) .' minute')],
@@ -12,34 +6,7 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
-
-function convertTimeToRelativeFormat(int $timeStamp) : string
-{
-    if ($timeStamp < 0) {
-        throw new \InvalidArgumentException('Timestamp cannot be less than zero');
-    }
-
-    $passed_time = time() - $timeStamp;
-
-    if ($passed_time < 0) {
-        throw new \InvalidArgumentException('Timestamp cannot be greater than current time.');
-    }
-
-    $passed_hours = round($passed_time / SECONDS_IN_HOUR);
-
-    if ($passed_hours < 1) {
-        $passed_minutes = round($passed_time / SECONDS_IN_MINUTE);
-        return sprintf('%d минут назад', $passed_minutes);
-    }
-
-    if ($passed_hours < 24) {
-        return sprintf('%d часов назад', $passed_hours);
-    }
-
-    return date(DEFAULT_DATE_FORMAT, $timeStamp);
-}
 ?>
-
 <nav class="nav">
     <ul class="nav__list container">
         <li class="nav__item">
@@ -111,7 +78,7 @@ function convertTimeToRelativeFormat(int $timeStamp) : string
                         <tr class="history__item">
                             <td class="history__name"><?= $bet["name"] ?></td>
                             <td class="history__price"><?= $bet["price"] ?> р</td>
-                            <td class="history__time"><?= convertTimeToRelativeFormat($bet["ts"]) ?></td>
+                            <td class="history__time"><?= convert_time_to_relative_format($bet["ts"]) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
