@@ -1230,3 +1230,8 @@ h2 {
 .rates__item--end {
   opacity: 0.4;
 }
+
+.http-error {
+  padding: 30px;
+  text-align: center;
+}

@@ -37,7 +37,7 @@ function include_template(string $template_name, array $params = []) : string
         return '';
     }
 
-    array_walk_recursive($params, function(&$item) {
+    array_walk_recursive($params, function (&$item) {
         $item = htmlspecialchars($item);
     });
 
