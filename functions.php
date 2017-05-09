@@ -41,7 +41,7 @@ function include_template(string $template_name, array $params = []) : string
         $item = htmlspecialchars($item);
     });
 
-    extract($params, EXTR_OVERWRITE);
+    extract($params);
 
     ob_start();
     include("templates/$template_name");
