@@ -1,8 +1,3 @@
-<?php
-// Почему не работает ./../models/lots.php ?
-$path = __DIR__ . '/../models/lots.php';
-require_once($path);
-?>
 <section class="promo">
     <h2 class="promo__title">Нужен стафф для катки?</h2>
     <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>

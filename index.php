@@ -1,4 +1,5 @@
 <?php
+require_once('/../models/lots.php');
 // устанавливаем часовой пояс в Московское время
 date_default_timezone_set('Europe/Moscow');
 

@@ -1,6 +1,15 @@
 <?php
 require_once 'functions.php';
 require_once('./models/lots.php');
+$id = isset($_GET['id']) ? $_GET['id'] : null;
+$is_valid_id = $id || $id === '0' ? array_key_exists($id, $lotsData) : null;
+
+if (!$is_valid_id) {
+    header("HTTP/1.1 404 Not Found");
+    return;
+} else {
+    $lot = $lotsData[$id];
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,17 +25,7 @@ require_once('./models/lots.php');
 <?= include_template('header.php'); ?>
 
 <main>
-    <?php
-    $id = isset($_GET['id']) ? $_GET['id'] : null;
-    $is_valid_id = $id || $id === '0' ? array_key_exists($id, $lotsData) : null;
-
-    if (!$is_valid_id) {
-        echo include_template('404.php');
-    } else {
-        $lot = $lotsData[$id];
-        echo include_template('lot.php', ['id' => $id, 'lot' => $lot]);
-    }
-    ?>
+    <?= include_template('lot.php', ['lot' => $lot]); ?>
 </main>
 
 <?= include_template('footer.php'); ?>
