@@ -34,7 +34,7 @@ $bets = [
     <div class="lot-item__content">
         <div class="lot-item__left">
             <div class="lot-item__image">
-                <img src="<?= $lot['imageSrc'] ?>" width="730" height="548" alt="<?= $lot['name'] ?>">
+                <img src="<?= $lot['image_src'] ?>" width="730" height="548" alt="<?= $lot['name'] ?>">
             </div>
             <p class="lot-item__category">Категория: <span><?= $lot['category'] ?></span></p>
             <!-- Где можно найти описание? -->

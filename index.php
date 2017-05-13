@@ -1,5 +1,5 @@
 <?php
-require_once('/../models/lots.php');
+require_once('./models/lots.php');
 // устанавливаем часовой пояс в Московское время
 date_default_timezone_set('Europe/Moscow');
 
@@ -32,7 +32,7 @@ $lot_time_remaining = sprintf('%02d:%02d', $hours_remaining, $minutes_remaining)
 <?= include_template('header.php'); ?>
 
 <main class="container">
-    <?= include_template('home.php', ['lot_time_remaining' => $lot_time_remaining]); ?>
+    <?= include_template('home.php', ['lot_time_remaining' => $lot_time_remaining, 'lots_Data' => $lots_Data]); ?>
 </main>
 
 <?= include_template('footer.php'); ?>

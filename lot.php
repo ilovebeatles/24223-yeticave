@@ -1,14 +1,14 @@
 <?php
 require_once 'functions.php';
-require_once('./models/lots.php');
+require_once("./models/lots.php");
 $id = isset($_GET['id']) ? $_GET['id'] : null;
-$is_valid_id = $id || $id === '0' ? array_key_exists($id, $lotsData) : null;
+$is_valid_id = $id || $id === '0' ? array_key_exists($id, $lots_Data) : null;
 
 if (!$is_valid_id) {
     header("HTTP/1.1 404 Not Found");
     return;
 } else {
-    $lot = $lotsData[$id];
+    $lot = $lots_Data[$id];
 }
 ?>
 

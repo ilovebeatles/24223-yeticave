@@ -26,58 +26,58 @@
     <div class="lots__header">
         <h2>Открытые лоты</h2>
         <?php
-            $categoriesNames = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
-            $lotsData = [
+            $categories_names = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+            $lots_Data = [
                 [
                     'name' => '2014 Rossignol District Snowboard',
-                    'category' => $categoriesNames[0],
+                    'category' => $categories_names[0],
                     'price' => 10999,
-                    'imageSrc' => 'img/lot-1.jpg'
+                    'image_src' => 'img/lot-1.jpg'
                 ],
                 [
                     'name' => 'DC Ply Mens 2016/2017 Snowboard',
-                    'category' => $categoriesNames[0],
+                    'category' => $categories_names[0],
                     'price' => 159999,
-                    'imageSrc' => 'img/lot-2.jpg'
+                    'image_src' => 'img/lot-2.jpg'
                 ],
                 [
                     'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-                    'category' => $categoriesNames[1],
+                    'category' => $categories_names[1],
                     'price' => 8000,
-                    'imageSrc' => 'img/lot-3.jpg'
+                    'image_src' => 'img/lot-3.jpg'
                 ],
                 [
                     'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
-                    'category' => $categoriesNames[2],
+                    'category' => $categories_names[2],
                     'price' => 10999,
-                    'imageSrc' => 'img/lot-4.jpg'
+                    'image_src' => 'img/lot-4.jpg'
                 ],
                 [
                     'name' => 'Куртка для сноуборда DC Mutiny Charocal',
-                    'category' => $categoriesNames[3],
+                    'category' => $categories_names[3],
                     'price' => 7500,
-                    'imageSrc' => 'img/lot-5.jpg'
+                    'image_src' => 'img/lot-5.jpg'
                 ],
                 [
                     'name' => 'Маска Oakley Canopy',
-                    'category' => $categoriesNames[5],
+                    'category' => $categories_names[5],
                     'price' => 5400,
-                    'imageSrc' => 'img/lot-6.jpg'
+                    'image_src' => 'img/lot-6.jpg'
                 ],
             ];
         ?>
         <select class="lots__select">
             <option>Все категории</option>
-            <?php foreach ($categoriesNames as $category) : ?>
+            <?php foreach ($categories_names as $category) : ?>
                 <option><?= $category ?></option>
             <?php endforeach; ?>
         </select>
     </div>
     <ul class="lots__list">
-        <?php foreach ($lotsData as $lot) : ?>
+        <?php foreach ($lots_Data as $lot) : ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?= $lot["imageSrc"] ?>" width="350" height="260" alt="<?= $lot["name"] ?>">
+                    <img src="<?= $lot["image_src"] ?>" width="350" height="260" alt="<?= $lot["name"] ?>">
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?= $lot["category"] ?></span>

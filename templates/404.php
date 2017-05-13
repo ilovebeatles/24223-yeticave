@@ -1,1 +1,0 @@
-<h2 class="http-error"><b>404</b> Not Found</h2>
